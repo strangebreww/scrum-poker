@@ -1,0 +1,34 @@
+{
+  "name": "scrum-poker",
+  "version": "1.0.0",
+  "description": "Scrum poker app",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/strangebreww/scrum-poker.git"
+  },
+  "keywords": [
+    "scrum",
+    "react",
+    "vite"
+  ],
+  "author": "Alexey Ermakov",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/strangebreww/scrum-poker/issues"
+  },
+  "homepage": "https://github.com/strangebreww/scrum-poker#readme",
+  "dependencies": {
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^1.1.4",
+    "vite": "^2.7.13"
+  }
+}
