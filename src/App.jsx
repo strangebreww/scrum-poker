@@ -1,7 +1,12 @@
 import "./App.css";
+import CardSelector from './CardSelector';
 
 function App() {
-    return <div className="App" />;
+    return (
+        <main className="App">
+            <CardSelector />
+        </main>
+    );
 }
 
 export default App;

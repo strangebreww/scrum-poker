@@ -1,5 +1,27 @@
 .App {
+    padding: 8px;
     text-align: center;
+}
+
+.card {
+    border: 1px solid #000;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 2rem;
+    height: 140px;
+    line-height: 140px;
+    text-align: center;
+    width: 80px;
+}
+
+.card-selector {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
+.card-selector > div:not(:last-child) {
+    margin-right: 16px;
 }
 
 button {
