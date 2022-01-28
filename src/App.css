@@ -1,5 +1,9 @@
+:root {
+    --card-width: 80px;
+}
+
 .App {
-    padding: 8px;
+    padding: 8px 20px;
     text-align: center;
 }
 
@@ -11,17 +15,29 @@
     height: 140px;
     line-height: 140px;
     text-align: center;
-    width: 80px;
+    width: var(--card-width);
 }
 
 .card-selector {
-    align-items: center;
     display: flex;
     justify-content: center;
+    padding: 0 0 20px;
 }
 
 .card-selector > div:not(:last-child) {
     margin-right: 16px;
+}
+
+.player {
+    width: var(--card-width);
+}
+
+.players {
+    padding: 0 80px;   
+}
+
+.you {
+    font-style: italic;
 }
 
 button {
