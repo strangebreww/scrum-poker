@@ -1,5 +1,5 @@
 function Player(props) {
-	const yourEstimate = Array.isArray(props.players) ? props.players[0] : '';
+	const yourEstimate = Array.isArray(props.players) ? props.players[0] : "";
 
 	return (
 		<>
@@ -10,7 +10,8 @@ function Player(props) {
 					<div className="card">{yourEstimate}</div>
 				</section>
 			</section>
-		</>);	
+		</>
+	);
 }
 
 export default Player;
