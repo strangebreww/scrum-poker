@@ -1,3 +1,5 @@
+import PropTypes from "prop-types";
+
 function Card(props) {
 	const onCardClick = (event) => {
 		props.handleClick(event.target.textContent);
@@ -9,5 +11,10 @@ function Card(props) {
 		</div>
 	);
 }
+
+Card.propTypes = {
+	handleClick: PropTypes.func,
+	value: PropTypes.number,
+};
 
 export default Card;

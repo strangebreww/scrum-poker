@@ -1,4 +1,5 @@
 import Card from "./Card";
+import PropTypes from "prop-types";
 
 function CardSelector(props) {
 	const cards = [1, 2, 3, 5, 8, 13, 20];
@@ -14,5 +15,9 @@ function CardSelector(props) {
 		</>
 	);
 }
+
+CardSelector.propTypes = {
+	handleClick: PropTypes.func,
+};
 
 export default CardSelector;

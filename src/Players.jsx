@@ -1,3 +1,5 @@
+import PropTypes from "prop-types";
+
 function Player(props) {
 	const yourEstimate = Array.isArray(props.players) ? props.players[0] : "";
 
@@ -13,5 +15,9 @@ function Player(props) {
 		</>
 	);
 }
+
+Player.propTypes = {
+	players: PropTypes.array,
+};
 
 export default Player;
