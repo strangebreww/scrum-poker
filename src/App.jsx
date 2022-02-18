@@ -1,16 +1,7 @@
-import { useState } from "react";
 import "./App.css";
-import CardSelector from "./CardSelector";
-import Players from "./Players";
+import Poker from "./Poker";
 
 function App() {
-	const [state, setState] = useState([]);
-
-	const onCardClick = (value) => {
-		setState((s) => {
-			return [value].concat(s.slice(1));
-		});
-	};
 
 	return (
 		<>
@@ -18,8 +9,7 @@ function App() {
 				<h1>Scrum Poker</h1>
 			</header>
 			<main className="App">
-				<CardSelector handleClick={onCardClick} />
-				<Players players={state} />
+				<Poker />
 			</main>
 			<footer>Made with ❤️ using React</footer>
 		</>
