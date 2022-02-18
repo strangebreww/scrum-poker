@@ -13,10 +13,16 @@ function App() {
 	};
 
 	return (
-		<main className="App">
-			<CardSelector handleClick={onCardClick} />
-			<Players players={state} />
-		</main>
+		<>
+			<header>
+				<h1>Scrum Poker</h1>
+			</header>
+			<main className="App">
+				<CardSelector handleClick={onCardClick} />
+				<Players players={state} />
+			</main>
+			<footer>Made with ❤️ using React</footer>
+		</>
 	);
 }
 

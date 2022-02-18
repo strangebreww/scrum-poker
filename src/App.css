@@ -2,13 +2,28 @@
     --card-width: 80px;
 }
 
+* {
+	box-sizing: border-box;
+}
+
+header {
+	background-color: lightseagreen;
+	text-align: center;
+}
+
+footer {
+	background-color: lightseagreen;
+	padding: 8px 20px;
+	text-align: right;
+}
+
 .App {
     padding: 8px 20px;
     text-align: center;
 }
 
 .card {
-    border: 1px solid #000;
+	border: 1px solid #000;
     border-radius: 4px;
     cursor: pointer;
     font-size: 2rem;
@@ -33,13 +48,15 @@
 }
 
 .players {
-    padding: 0 80px;   
+	padding: 0 80px;
 }
 
 .you {
     font-style: italic;
 }
 
-button {
-    font-size: calc(10px + 2vmin);
+#root {
+	display: grid;
+  	height: 100vh;
+  	grid-template-rows: auto 1fr auto;
 }
