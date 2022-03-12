@@ -48,7 +48,12 @@ footer {
 }
 
 .players {
+	display: flex;
 	padding: 0 80px;
+}
+
+.players > .player:not(:last-child) {
+	margin-right: 12px;
 }
 
 .you {
