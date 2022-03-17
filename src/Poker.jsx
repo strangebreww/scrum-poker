@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import CardSelector from "./CardSelector";
 import Players from "./Players";
 import { useServerContext } from "./useServerContext";
@@ -6,25 +6,30 @@ import { useServerContext } from "./useServerContext";
 function Poker() {
 	const [state, setState] = useState([]);
 
-	const { wsClient } = useServerContext();
+	const { wsClient, players } = useServerContext();
+
+	const yourId = useMemo(() => {
+		if (!players.size) {
+			return;
+		}
+
+		return [...players][0][0];
+	}, [players]);
 
 	const onCardClick = (value) => {
+		send(value);
+
 		setState((s) => {
 			return [value].concat(s.slice(1));
 		});
 	};
 
-	const send = () => {
-		wsClient.send(
-			JSON.stringify({ name: "test-name", message: "test-message" })
-		);
+	const send = (estimate) => {
+		wsClient.send(JSON.stringify({ id: yourId, estimate }));
 	};
 
 	return (
 		<>
-			<button onClick={send} style={{ width: 100 }}>
-				Test ws connection
-			</button>
 			<CardSelector handleClick={onCardClick} />
 			<Players players={state} />
 		</>

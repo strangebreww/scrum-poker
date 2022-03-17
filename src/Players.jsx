@@ -5,6 +5,7 @@ function Player(props) {
 	const { players } = useServerContext();
 
 	const yourEstimate = Array.isArray(props.players) ? props.players[0] : "";
+	const otherPlayers = [...players].slice(1);
 
 	return (
 		<>
@@ -14,10 +15,10 @@ function Player(props) {
 					<p className="you">You</p>
 					<div className="card">{yourEstimate}</div>
 				</section>
-				{players.slice(1).map((id) => (
+				{otherPlayers.map(([id, estimate]) => (
 					<section key={id} className="player">
 						<p>{id.substring(0, 8)}</p>
-						<div className="card"></div>
+						<div className="card">{estimate}</div>
 					</section>
 				))}
 			</section>

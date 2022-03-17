@@ -5,7 +5,7 @@ export const ServerContext = createContext();
 
 export function ServerContextProvider({ children }) {
 	const [wsClient, setWsClient] = useState();
-	const [players, setPlayers] = useState([]);
+	const [players, setPlayers] = useState(new Map());
 
 	useEffect(() => {
 		const ws = new WebSocket("ws://localhost:8000");
@@ -16,7 +16,10 @@ export function ServerContextProvider({ children }) {
 
 				const joinedPlayers = messages.reduce((prev, cur) => {
 					if (cur.name === "new client") {
-						prev.push(cur.message);
+						prev.push({
+							id: cur.message.id,
+							estimate: cur.message.estimate,
+						});
 					}
 
 					return prev;
@@ -24,17 +27,25 @@ export function ServerContextProvider({ children }) {
 
 				const quitPlayers = messages.reduce((prev, cur) => {
 					if (cur.name === "closed client") {
-						prev.push(cur.message);
+						prev.push(cur.message.id);
 					}
 
 					return prev;
 				}, []);
 
-				setPlayers((p) =>
-					p
-						.concat(joinedPlayers)
-						.filter((p) => !quitPlayers.includes(p))
-				);
+				setPlayers((p) => {
+					const players = new Map(p);
+
+					joinedPlayers.forEach((j) => {
+						players.set(j.id, j.estimate);
+					});
+
+					quitPlayers.forEach((id) => {
+						players.delete(id);
+					});
+
+					return players;
+				});
 
 				console.log("message received", messages);
 			} catch (e) {
@@ -53,7 +64,7 @@ export function ServerContextProvider({ children }) {
 }
 
 ServerContextProvider.propTypes = {
-	children: PropTypes.element,
+	children: PropTypes.arrayOf(PropTypes.element),
 };
 
 export function useServerContext() {
