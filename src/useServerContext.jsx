@@ -12,42 +12,57 @@ export function ServerContextProvider({ children }) {
 
 		ws.onmessage = (message) => {
 			try {
-				const messages = JSON.parse(message.data);
+				const messageData = JSON.parse(message.data);
 
-				const joinedPlayers = messages.reduce((prev, cur) => {
-					if (cur.name === "new client") {
-						prev.push({
-							id: cur.message.id,
-							estimate: cur.message.estimate,
-						});
+				if (Array.isArray(messageData)) {
+					const history = messageData.reduce((prev, cur) => {
+						prev[cur.id] = cur.estimate;
+
+						return prev;
+					}, {});
+
+					setPlayers((p) => {
+						const players = new Map(p);
+
+						for (const id in history) {
+							players.set(id, history[id]);
+						}
+
+						return players;
+					});
+				} else {
+					const recentPlayers = {};
+
+					if (
+						messageData.type === "new client" ||
+						messageData.type === "active client"
+					) {
+						recentPlayers.active = {
+							id: messageData.payload.id,
+							estimate: messageData.payload.estimate,
+						};
 					}
 
-					return prev;
-				}, []);
-
-				const quitPlayers = messages.reduce((prev, cur) => {
-					if (cur.name === "closed client") {
-						prev.push(cur.message.id);
+					if (messageData.type === "closed client") {
+						recentPlayers.quit = messageData.payload.id;
 					}
 
-					return prev;
-				}, []);
+					setPlayers((p) => {
+						const players = new Map(p);
 
-				setPlayers((p) => {
-					const players = new Map(p);
+						const { active, quit } = recentPlayers;
 
-					joinedPlayers.forEach((j) => {
-						players.set(j.id, j.estimate);
+						if (active) {
+							players.set(active.id, active.estimate);
+						}
+
+						if (quit) {
+							players.delete(quit);
+						}
+
+						return players;
 					});
-
-					quitPlayers.forEach((id) => {
-						players.delete(id);
-					});
-
-					return players;
-				});
-
-				console.log("message received", messages);
+				}
 			} catch (e) {
 				console.error(e.message);
 			}
