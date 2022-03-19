@@ -17,7 +17,7 @@ footer {
 	text-align: right;
 }
 
-.App {
+.app {
     padding: 8px 20px;
     text-align: center;
 }
@@ -60,7 +60,7 @@ footer {
     font-style: italic;
 }
 
-#root {
+:global(#root) {
 	display: grid;
   	height: 100vh;
   	grid-template-rows: auto 1fr auto;

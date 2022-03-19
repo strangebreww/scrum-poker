@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+import styles from "./css/App.module.css";
 
 function Card(props) {
 	const onCardClick = (event) => {
@@ -6,7 +7,7 @@ function Card(props) {
 	};
 
 	return (
-		<div className="card" onClick={onCardClick}>
+		<div className={styles.card} onClick={onCardClick}>
 			{props.value}
 		</div>
 	);

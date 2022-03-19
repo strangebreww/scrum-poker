@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+import styles from "./css/App.module.css";
 import { useServerContext } from "./useServerContext";
 
 function Player(props) {
@@ -10,15 +11,15 @@ function Player(props) {
 	return (
 		<>
 			<h2>Players</h2>
-			<section className="players">
-				<section className="player">
-					<p className="you">You</p>
-					<div className="card">{yourEstimate}</div>
+			<section className={styles.players}>
+				<section className={styles.player}>
+					<p className={styles.you}>You</p>
+					<div className={styles.card}>{yourEstimate}</div>
 				</section>
 				{otherPlayers.map(([id, estimate]) => (
-					<section key={id} className="player">
+					<section key={id} className={styles.player}>
 						<p>{id.substring(0, 8)}</p>
-						<div className="card">{estimate}</div>
+						<div className={styles.card}>{estimate}</div>
 					</section>
 				))}
 			</section>
