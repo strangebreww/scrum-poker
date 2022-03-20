@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
 import { createContext, useContext, useEffect, useState } from "react";
+import { port } from "./config";
 
 export const ServerContext = createContext();
 
@@ -8,7 +9,7 @@ export function ServerContextProvider({ children }) {
 	const [players, setPlayers] = useState(new Map());
 
 	useEffect(() => {
-		const ws = new WebSocket("ws://localhost:8000");
+		const ws = new WebSocket("ws://localhost:" + port);
 
 		ws.onmessage = (message) => {
 			try {
