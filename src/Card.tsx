@@ -1,9 +1,15 @@
-import PropTypes from "prop-types";
-import styles from "./css/App.module.css";
+import styles from "./App.module.css";
 
-function Card(props) {
-	const onCardClick = (event) => {
-		props.handleClick(event.target.textContent);
+type CardProps = {
+	value: number;
+	handleClick: (value: string) => void;
+};
+
+function Card(props: CardProps) {
+	const onCardClick: React.MouseEventHandler<HTMLDivElement> = (event) => {
+		if (event.target instanceof HTMLDivElement) {
+			props.handleClick(event.target.textContent || "");
+		}
 	};
 
 	return (
@@ -12,10 +18,5 @@ function Card(props) {
 		</div>
 	);
 }
-
-Card.propTypes = {
-	handleClick: PropTypes.func,
-	value: PropTypes.number,
-};
 
 export default Card;

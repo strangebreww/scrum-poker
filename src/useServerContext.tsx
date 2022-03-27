@@ -1,11 +1,34 @@
 import PropTypes from "prop-types";
 import { createContext, useContext, useEffect, useState } from "react";
 
-export const ServerContext = createContext();
+type Players = Map<string, string | null>;
+type WsClient = WebSocket | undefined;
 
-export function ServerContextProvider({ children }) {
-	const [wsClient, setWsClient] = useState();
-	const [players, setPlayers] = useState(new Map());
+type ServerContextType = {
+	players: Players;
+	wsClient: WsClient;
+};
+
+type ProviderProps = {
+	children: React.ReactNode;
+};
+
+type RecentPlayers = {
+	active?: {
+		id: string;
+		estimate: string;
+	};
+	quit?: string;
+};
+
+export const ServerContext = createContext<ServerContextType>({
+	players: new Map(),
+	wsClient: undefined,
+});
+
+export function ServerContextProvider({ children }: ProviderProps) {
+	const [wsClient, setWsClient] = useState<WebSocket>();
+	const [players, setPlayers] = useState<Players>(new Map());
 
 	useEffect(() => {
 		const ws = new WebSocket("ws://localhost:8000");
@@ -31,7 +54,7 @@ export function ServerContextProvider({ children }) {
 						return players;
 					});
 				} else {
-					const recentPlayers = {};
+					const recentPlayers: RecentPlayers = {};
 
 					if (
 						messageData.type === "new client" ||
@@ -64,7 +87,9 @@ export function ServerContextProvider({ children }) {
 					});
 				}
 			} catch (e) {
-				console.error(e.message);
+				if (e instanceof Error) {
+					console.error(e.message);
+				}
 			}
 		};
 

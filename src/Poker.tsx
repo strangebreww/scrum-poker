@@ -4,7 +4,7 @@ import Players from "./Players";
 import { useServerContext } from "./useServerContext";
 
 function Poker() {
-	const [state, setState] = useState([]);
+	const [state, setState] = useState<string[]>([]);
 
 	const { wsClient, players } = useServerContext();
 
@@ -16,7 +16,7 @@ function Poker() {
 		return [...players][0][0];
 	}, [players]);
 
-	const onCardClick = (value) => {
+	const onCardClick = (value: string) => {
 		send(value);
 
 		setState((s) => {
@@ -24,8 +24,10 @@ function Poker() {
 		});
 	};
 
-	const send = (estimate) => {
-		wsClient.send(JSON.stringify({ id: yourId, estimate }));
+	const send = (estimate: string) => {
+		if (wsClient) {
+			wsClient.send(JSON.stringify({ id: yourId, estimate }));
+		}
 	};
 
 	return (
