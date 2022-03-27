@@ -5,14 +5,17 @@
 	},
 	"extends": [
 		"eslint:recommended",
+		"plugin:@typescript-eslint/recommended",
 		"plugin:react/recommended",
 		"prettier"
 	],
 	"plugins": [
+		"@typescript-eslint",
 		"prettier",
 		"react",
 		"react-hooks"
 	],
+	"parser": "@typescript-eslint/parser",
 	"parserOptions": {
 		"ecmaVersion": 2021,
 		"sourceType": "module",

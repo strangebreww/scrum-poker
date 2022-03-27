@@ -1,8 +1,11 @@
-import PropTypes from "prop-types";
+import styles from "./App.module.css";
 import Card from "./Card";
-import styles from "./css/App.module.css";
 
-function CardSelector(props) {
+type CardSelectorProps = {
+	handleClick: (value: string) => void;
+};
+
+function CardSelector(props: CardSelectorProps) {
 	const cards = [1, 2, 3, 5, 8, 13, 20];
 
 	return (
@@ -16,9 +19,5 @@ function CardSelector(props) {
 		</>
 	);
 }
-
-CardSelector.propTypes = {
-	handleClick: PropTypes.func,
-};
 
 export default CardSelector;

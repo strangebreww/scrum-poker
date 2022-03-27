@@ -1,8 +1,11 @@
-import PropTypes from "prop-types";
-import styles from "./css/App.module.css";
+import styles from "./App.module.css";
 import { useServerContext } from "./useServerContext";
 
-function Player(props) {
+type PlayerProps = {
+	players: string[];
+};
+
+function Player(props: PlayerProps) {
 	const { players } = useServerContext();
 
 	const yourEstimate = Array.isArray(props.players) ? props.players[0] : "";
@@ -26,9 +29,5 @@ function Player(props) {
 		</>
 	);
 }
-
-Player.propTypes = {
-	players: PropTypes.array,
-};
 
 export default Player;
