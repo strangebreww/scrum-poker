@@ -1,5 +1,5 @@
-import styles from "./App.module.css";
 import Card from "./Card";
+import styles from "./css/App.module.css";
 
 type CardSelectorProps = {
 	handleClick: (value: string) => void;

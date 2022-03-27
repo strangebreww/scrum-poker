@@ -1,4 +1,4 @@
-import styles from "./App.module.css";
+import styles from "./css/App.module.css";
 
 type CardProps = {
 	value: number;

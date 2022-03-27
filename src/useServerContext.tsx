@@ -1,4 +1,3 @@
-import PropTypes from "prop-types";
 import { createContext, useContext, useEffect, useState } from "react";
 import { port } from "./config";
 
@@ -103,10 +102,6 @@ export function ServerContextProvider({ children }: ProviderProps) {
 		</ServerContext.Provider>
 	);
 }
-
-ServerContextProvider.propTypes = {
-	children: PropTypes.arrayOf(PropTypes.element),
-};
 
 export function useServerContext() {
 	return useContext(ServerContext);
